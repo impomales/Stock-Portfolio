@@ -4,9 +4,9 @@
   "description": "stock portfolio web app",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js",
-    "test": "mocha"
+    "start": "node server",
+    "start:dev": "NODE_ENV='development' nodemon server",
+    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\""
   },
   "repository": {
     "type": "git",
