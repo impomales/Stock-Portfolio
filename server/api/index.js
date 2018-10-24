@@ -7,6 +7,6 @@ router.use((req, res, next) => {
   err.status = 404;
 
   next(404);
-})
+});
 
 module.exports = router;

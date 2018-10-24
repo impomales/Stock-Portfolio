@@ -4,8 +4,6 @@ const expect = require('chai').expect;
 
 const databaseName = name + (process.env.NODE_ENV === 'test' ? '-test' : '');
 
-
-
 describe('db', () => {
   it('can connect to database', () => {
     const db = new Sequelize(
@@ -13,8 +11,8 @@ describe('db', () => {
       { logging: false }
     );
 
-    db.sync(({config}) => {
+    db.sync(({ config }) => {
       expect(config.databasename).to.equal('stockportfolio-test');
-    })
-  })
+    });
+  });
 });

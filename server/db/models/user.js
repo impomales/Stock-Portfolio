@@ -19,7 +19,7 @@ const User = db.define('User', {
   },
   balance: {
     type: Sequelize.INTEGER,
-    defaultValue: 500000,   // in pennies.
+    defaultValue: 500000, // in pennies.
     validate: {
       min: 0
     }

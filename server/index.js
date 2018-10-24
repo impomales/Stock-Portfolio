@@ -21,15 +21,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // html
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', 'public/index.html')));
-
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+);
 
 db.sync().then(({ config }) => {
-  console.log(`successfully connected to database: ${config.database}`)
-  console.log();
+  console.log(`successfully connected to database: ${config.database}`);
   app.listen(8080, () => {
     console.log(`app listening on port: ${process.env.PORT}`);
   });
 });
-
-
