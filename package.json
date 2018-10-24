@@ -1,0 +1,22 @@
+{
+  "name": "stockportfolio",
+  "version": "1.0.0",
+  "description": "stock portfolio web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/impomales/TTP-FS20180728.git"
+  },
+  "author": "Isaias M. Pomales",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/impomales/TTP-FS20180728/issues"
+  },
+  "homepage": "https://github.com/impomales/TTP-FS20180728#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
