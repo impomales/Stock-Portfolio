@@ -13,10 +13,7 @@ const User = db.define('User', {
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      len: [5, 100]
-    }
+    allowNull: false
   },
   password: {
     type: Sequelize.STRING,
