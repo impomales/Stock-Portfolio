@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'production') require('../secrets');
 app.use(morgan('dev'));
 
 // api routes
-app.use('/api', require('./api'));
+app.use('/auth', require('./auth'));
 
 // parse http responses
 app.use(bodyParser.json());
