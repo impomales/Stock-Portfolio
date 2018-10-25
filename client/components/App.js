@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 
 import Portfolio from './Portfolio';
@@ -14,7 +15,7 @@ class App extends Component {
 
     this.state = {
       user: {}
-    }
+    };
   }
 
   componentDidMount() {
@@ -22,27 +23,35 @@ class App extends Component {
   }
 
   fetchUserId() {
-    fetch('/auth/me')
-      .then(res => res.json())
+    axios
+      .get('/auth/me')
+      .then(res => res.data)
       .then(user => this.setState({ user }));
   }
 
-  isLoggedIn() {
-    return this.state.user && this.state.user.id;
-  }
-
   render() {
-    console.log(this.state.user);
+    const { user } = this.state;
     return (
       <Router>
-        <Switch>
-          <Route exact path="/" component={Portfolio} />
-          <Route path="/portfolio" component={Portfolio} />
-          <Route path="/history" component={Transactions} />
-          <Route path="/signin" component={SignIn} />
-          <Route path="/register" component={Register} />
-          <Route component={NoMatch} />
-        </Switch>
+        {// user is logged in.
+        user && user.id ? (
+          <Switch>
+            <Route exact path="/" render={() => <Portfolio user={user} />} />
+            <Route path="/portfolio" render={() => <Portfolio user={user} />} />
+            <Route
+              path="/history"
+              render={() => <Transactions user={user} />}
+            />
+            <Route component={NoMatch} />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/" component={SignIn} />} />
+            <Route path="/(portfolio|sigin|history)" component={SignIn} />
+            <Route path="/register" component={Register} />
+            <Route component={NoMatch} />
+          </Switch>
+        )}
       </Router>
     );
   }
