@@ -17,6 +17,13 @@ const User = db.define('User', {
       len: [5, 100]
     }
   },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      len: [5, 100]
+    }
+  },
   balance: {
     type: Sequelize.INTEGER,
     defaultValue: 500000, // in pennies.
