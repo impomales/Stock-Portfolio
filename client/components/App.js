@@ -31,6 +31,7 @@ class App extends Component {
 
   render() {
     const { user } = this.state;
+    console.log('USER', user);
     return (
       <Router>
         {// user is logged in.

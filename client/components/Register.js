@@ -1,5 +1,6 @@
 import React, { Component } from 'React';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 class Register extends Component {
   constructor(props) {
@@ -35,25 +36,26 @@ class Register extends Component {
       return;
     }
 
-    fetch('/auth/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-      body: JSON.stringify({ name, email, password })
-    })
-      .then(res => {
-        if (res.status === 401) throw new Error('User already exists.');
-        res.json();
+    axios
+      .post('/auth/signup', {
+        name,
+        email,
+        password
       })
-      .then(user => {
+      .then(res => res.data)
+      .then(() => {
         // created user.
-        this.setState({ email: '', password: '', name: '', err: '', success: true });
-
+        this.setState({
+          email: '',
+          password: '',
+          name: '',
+          err: '',
+          success: true
+        });
       })
       .catch(err => {
-        if (err.message === 'User already exists.') {
-          this.setState({ err: err.message });
+        if (err.message === 'Request failed with status code 401') {
+          this.setState({ err: 'User already exists.' });
           return;
         }
         console.error(err);
