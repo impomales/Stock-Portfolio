@@ -33,7 +33,13 @@ app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // auth set up
-app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'this is a secret',
+    saveUninitialized: false,
+    resave: false
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', require('./auth'));
