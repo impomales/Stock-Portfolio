@@ -37,6 +37,12 @@ router.post(
   })
 );
 
+router.post('/logout', (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.redirect('/');
+});
+
 router.post('/signup', (req, res, next) => {
   const { email, password, name } = req.body;
 
