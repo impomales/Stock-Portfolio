@@ -11,14 +11,12 @@ const app = express();
 
 if (process.env.NODE_ENV !== 'production') require('../secrets');
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
+passport.serializeUser((user, done) => done(null, user.id));
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
+passport.deserializeUser((id, done) => {
+  return User.findOne({ where: { id: id } })
+    .then(user => done(null, user))
+    .catch(err => done(err));
 });
 
 // logging middleware
@@ -29,9 +27,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());
 
-// serve static files
-app.use(express.static(path.join(__dirname, 'public')));
-
 // auth set up
 app.use(
   session({
@@ -40,14 +35,25 @@ app.use(
     resave: false
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', require('./auth'));
+
+// serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // html
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 );
+
+// error handling
+app.use((err, req, res, next) => {
+  console.error(err);
+  console.error(err.stack);
+  res.status(err.status || 500).send(err.message || 'Internal server error.');
+});
 
 db.sync().then(({ config }) => {
   console.log(`successfully connected to database: ${config.database}`);

@@ -10,19 +10,20 @@ passport.use(
       passwordField: 'password'
     },
     (email, password, done) => {
-      User.findOne({ email }, (err, user) => {
-        if (err) return done(err);
-        if (!user)
-          return done(null, false, {
-            message: 'Incorrect email.'
-          });
-        if (!user.validPassword(password))
-          return done(null, false, {
-            message: 'Invalid password.'
-          });
+      return User.findOne({ where: { email } })
+        .then(user => {
+          if (!user)
+            return done(null, false, {
+              message: 'Incorrect email.'
+            });
+          if (!user.isCorrectPassword(password))
+            return done(null, false, {
+              message: 'Invalid password.'
+            });
 
-        done(null, user);
-      });
+          return done(null, user);
+        })
+        .catch(err => done(err));
     }
   )
 );
