@@ -28,13 +28,6 @@ passport.use(
   )
 );
 
-// used for debugging.
-// router.get('/', (req, res, next) => {
-//   User.findAll({
-//     attributes: ['email', 'id']
-//   }).then(users => res.json(users));
-// })
-
 router.post(
   '/login',
   passport.authenticate('local', {
