@@ -1,4 +1,4 @@
 const db = require('./db');
-const { User } = require('./models');
+const { User, Transaction, Stock } = require('./models');
 
 module.exports = db;
