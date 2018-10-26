@@ -1,30 +1,25 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
 const router = require('express').Router();
 const { User } = require('../db/models');
 
-router.post(
-  '/login',
-  (req, res, next) => {
-    const { email, password } = req.body;
-    User.findOne({where: { email }})
-      .then(user => {
-        if (!user) {
-          res.json({message: 'Incorrect email.'});
-          return;
-        }
-        if (!user.isCorrectPassword(password)) {
-          res.json({message: 'Incorrect password.'});
-          return;
-        }
+router.post('/login', (req, res, next) => {
+  const { email, password } = req.body;
+  User.findOne({ where: { email } })
+    .then(user => {
+      if (!user) {
+        res.json({ message: 'Incorrect email.' });
+        return;
+      }
+      if (!user.isCorrectPassword(password)) {
+        res.json({ message: 'Incorrect password.' });
+        return;
+      }
 
-        req.login(user, err => {
-          err ? next(err) : res.json(user);
-        });
-      })
-      .catch(err => next(err));
-  }
-);
+      req.login(user, err => {
+        err ? next(err) : res.json(user);
+      });
+    })
+    .catch(err => next(err));
+});
 
 router.post('/logout', (req, res) => {
   req.logout();

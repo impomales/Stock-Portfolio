@@ -43,6 +43,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', require('./auth'));
 
+app.use('/api', require('./api'));
+
 // serve static files
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
