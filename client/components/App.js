@@ -35,7 +35,6 @@ class App extends Component {
 
   render() {
     const { user, fetchedUser } = this.state;
-    console.log('USER', user);
     return !fetchedUser ? (
       <Loading />
     ) : (
@@ -43,11 +42,24 @@ class App extends Component {
         {// user is logged in.
         user && user.id ? (
           <Switch>
-            <Route exact path="/" render={() => <Portfolio user={user} />} />
-            <Route path="/portfolio" render={() => <Portfolio user={user} />} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Portfolio user={user} updateUser={this.fetchUser} />
+              )}
+            />
+            <Route
+              path="/portfolio"
+              render={() => (
+                <Portfolio user={user} updateUser={this.fetchUser} />
+              )}
+            />
             <Route
               path="/history"
-              render={() => <Transactions user={user} />}
+              render={() => (
+                <Transactions user={user} updateUser={this.fetchUser} />
+              )}
             />
             <Route component={NoMatch} />
           </Switch>

@@ -1,5 +1,5 @@
 import React, { Component } from 'React';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Register extends Component {
@@ -89,6 +89,7 @@ class Register extends Component {
             onChange={this.handleChange}
           />
           <input type="submit" value="Register" />
+          <Link to="/signin">Already have an account?</Link>
         </form>
       </div>
     );

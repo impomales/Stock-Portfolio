@@ -1,5 +1,5 @@
 import React, { Component } from 'React';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
 
 class SignIn extends Component {
@@ -50,10 +50,13 @@ class SignIn extends Component {
   render() {
     const { email, password, err, success } = this.state;
 
+    if (success && window.location.pathname !== '/')
+      return <Redirect push to="/" />;
+
     return (
       <div className="auth">
         <h1>Sign In</h1>
-        { err && <p>{err}</p>}
+        {err && <p>{err}</p>}
         <form onSubmit={this.handleSubmit}>
           <input
             name="email"
@@ -70,6 +73,7 @@ class SignIn extends Component {
             onChange={this.handleChange}
           />
           <input type="submit" value="Sign In" />
+          <Link to="/register">New to site?</Link>
         </form>
       </div>
     );
