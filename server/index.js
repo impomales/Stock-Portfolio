@@ -60,7 +60,8 @@ app.use((err, req, res, next) => {
 
 db.sync().then(({ config }) => {
   console.log(`successfully connected to database: ${config.database}`);
-  app.listen(8080, () => {
-    console.log(`app listening on port: ${process.env.PORT}`);
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => {
+    console.log(`app listening on port: ${PORT}`);
   });
 });
