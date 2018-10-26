@@ -1,5 +1,6 @@
 import React, { Component } from 'React';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import axios from 'axios';
 
 class Register extends Component {
   constructor(props) {
@@ -35,25 +36,21 @@ class Register extends Component {
       return;
     }
 
-    fetch('/auth/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-      body: JSON.stringify({ name, email, password })
-    })
-      .then(res => {
-        if (res.status === 401) throw new Error('User already exists.');
-        res.json();
+    axios
+      .post('/auth/signup', {
+        name,
+        email,
+        password
       })
-      .then(user => {
+      .then(res => res.data)
+      .then(() => {
         // created user.
-        this.setState({ email: '', password: '', name: '', err: '', success: true });
-
+        this.props.updateUser();
+        this.setState({ success: true });
       })
       .catch(err => {
-        if (err.message === 'User already exists.') {
-          this.setState({ err: err.message });
+        if (err.message === 'Request failed with status code 401') {
+          this.setState({ err: 'User already exists.' });
           return;
         }
         console.error(err);
@@ -63,10 +60,10 @@ class Register extends Component {
   render() {
     const { name, email, password, err, success } = this.state;
 
-    if (success) return <Redirect to="/" />;
+    if (success) return <Redirect push to="/" />;
 
     return (
-      <div id="register">
+      <div className="auth">
         <h1>Register</h1>
         {err && <p>{err}</p>}
         <form onSubmit={this.handleSubmit}>
@@ -86,12 +83,13 @@ class Register extends Component {
           />
           <input
             name="password"
-            type="text"
+            type="password"
             value={password}
             placeholder="password"
             onChange={this.handleChange}
           />
           <input type="submit" value="Register" />
+          <Link to="/signin">Already have an account?</Link>
         </form>
       </div>
     );

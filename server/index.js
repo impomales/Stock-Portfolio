@@ -1,11 +1,13 @@
 const express = require('express');
 const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const flash = require('connect-flash');
 const passport = require('passport');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('./db');
+const sessionStore = new SequelizeStore({ db });
 const { User } = require('./db/models');
 const app = express();
 
@@ -31,6 +33,7 @@ app.use(flash());
 app.use(
   session({
     secret: process.env.SESSION_SECRET || 'this is a secret',
+    store: sessionStore,
     saveUninitialized: false,
     resave: false
   })
