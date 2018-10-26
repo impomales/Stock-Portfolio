@@ -45,13 +45,8 @@ class Register extends Component {
       .then(res => res.data)
       .then(() => {
         // created user.
-        this.setState({
-          email: '',
-          password: '',
-          name: '',
-          err: '',
-          success: true
-        });
+        this.props.updateUser();
+        this.setState({ success: true });
       })
       .catch(err => {
         if (err.message === 'Request failed with status code 401') {
@@ -65,10 +60,10 @@ class Register extends Component {
   render() {
     const { name, email, password, err, success } = this.state;
 
-    if (success) return <Redirect to="/" />;
+    if (success) return <Redirect push to="/" />;
 
     return (
-      <div id="register">
+      <div className="auth">
         <h1>Register</h1>
         {err && <p>{err}</p>}
         <form onSubmit={this.handleSubmit}>
@@ -88,7 +83,7 @@ class Register extends Component {
           />
           <input
             name="password"
-            type="text"
+            type="password"
             value={password}
             placeholder="password"
             onChange={this.handleChange}
