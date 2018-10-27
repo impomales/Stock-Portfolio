@@ -8,3 +8,15 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.gray {
+  color: gray;
+}
