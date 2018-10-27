@@ -52,4 +52,6 @@ li {
 
 .section {
   width: 85%;
+  height: fit-content;
+  margin-bottom: 50px;
 }

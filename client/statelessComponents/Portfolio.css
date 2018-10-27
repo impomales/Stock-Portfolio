@@ -2,8 +2,14 @@ footer {
   position: fixed;
   bottom: 0;
   right: 0;
-  padding: 0.5em 2em;
+  width: 100%;
   background-image: linear-gradient(to bottom right, black 50%, #9571d8);
+}
+
+footer p {
+  text-align: end;
+  padding: 1em 2em;
+  margin: 0;
 }
 
 .portfolio-body {
@@ -58,9 +64,13 @@ footer {
   border-top: 7.5px solid red;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .portfolio-body {
     flex-direction: column;
     justify-content: center;
+  }
+
+  footer p {
+    text-align: center;
   }
 }
