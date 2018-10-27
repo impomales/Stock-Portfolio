@@ -17,4 +17,10 @@ const calcPortfolioValue = portfolio => {
   return formatCurrency(value);
 }
 
-export { formatCurrency, calcPortfolioValue };
+const calcColor = stock => {
+  if (stock.latestPrice < stock.openPrice) return 'red';
+  if (stock.latestPrice > stock.openPrice) return 'green';
+  return 'gray';
+};
+
+export { formatCurrency, calcPortfolioValue, calcColor };

@@ -1,22 +1,26 @@
 import React from 'React';
-import Buy from './Buy';
-import Nav from '../containers/Nav';
+import Buy from '../components/Buy';
+import Nav from './Nav';
 
-import { formatCurrency, calcPortfolioValue } from '../util';
+import { formatCurrency, calcPortfolioValue, calcColor } from '../util';
 
 const Portfolio = ({ updateUser, user, portfolio }) => (
   <div>
     <Nav updateUser={updateUser} name={user.name} />
     <h1>{`Portfolio (${calcPortfolioValue(portfolio)})`}</h1>
     <div>
-      {portfolio.map(stock => (
-        <li key={stock.id}>
-          <p>
-            {`${stock.symbol} - ${stock.quantity}`}
-          </p>
-          <p>{formatCurrency(stock.latestPrice)}</p>
-        </li>
-      ))}
+      {portfolio.map(stock => {
+        const color = calcColor(stock);
+
+        return (
+          <li key={stock.id}>
+            <p>
+              <span className={color}>{stock.symbol}</span> - {stock.quantity}
+            </p>
+            <p className={color}>{formatCurrency(stock.latestPrice)}</p>
+          </li>
+        );
+      })}
     </div>
     <Buy updateUser={updateUser} balance={user.balance} />
     <footer>

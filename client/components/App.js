@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
-import Portfolio from './Portfolio';
-import Transactions from './Transactions';
+import Portfolio from '../statelessComponents/Portfolio';
+import Transactions from '../statelessComponents/Transactions';
 import SignIn from './SignIn';
 import Register from './Register';
-import Loading from '../containers/Loading';
-import NoMatch from '../containers/NoMatch';
+import Loading from '../statelessComponents/Loading';
+import NoMatch from '../statelessComponents/NoMatch';
 
 const apiUrl = 'https://api.iextrading.com/1.0/stock';
 
