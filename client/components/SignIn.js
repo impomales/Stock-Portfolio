@@ -56,7 +56,7 @@ class SignIn extends Component {
     return (
       <div className="section">
         <h1 className="header">Sign In</h1>
-        {err && <p>{err}</p>}
+        {err && <p className="red">{err}</p>}
         <form onSubmit={this.handleSubmit}>
           <input
             name="email"
@@ -72,7 +72,7 @@ class SignIn extends Component {
             placeholder="password"
             onChange={this.handleChange}
           />
-          <input type="submit" value="Sign In" />
+          <input className="submit" type="submit" value="Sign In" />
           <Link to="/register">New to site?</Link>
         </form>
       </div>

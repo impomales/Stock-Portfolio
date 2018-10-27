@@ -76,7 +76,7 @@ class Buy extends Component {
       <div>
         <p>Cash - {formatCurrency(this.props.balance)}</p>
         <form onSubmit={this.handleSubmit}>
-          {err && <p>{err}</p>}
+          {err && <p className="red">{err}</p>}
           <input
             name="symbol"
             type="text"
@@ -91,7 +91,7 @@ class Buy extends Component {
             placeholder="Qty"
             onChange={this.handleChange}
           />
-          <input type="submit" value="Buy" />
+          <input className="submit" type="submit" value="Buy" />
         </form>
       </div>
     );

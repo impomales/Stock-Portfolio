@@ -6,6 +6,16 @@ footer {
   background-image: linear-gradient(to bottom right, black 50%, #9571d8);
 }
 
+.portfolio-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.portfolio-body > * {
+  flex: 1 1 auto;
+  padding: 1em;
+}
+
 .stock-info {
   display: flex;
   justify-content: space-between;
@@ -46,4 +56,11 @@ footer {
   border-left: 7.5px solid transparent;
   border-right: 7.5px solid transparent;
   border-top: 7.5px solid red;
+}
+
+@media (max-width: 1000px) {
+  .portfolio-body {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
