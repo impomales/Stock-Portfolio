@@ -2,3 +2,40 @@
   display: flex;
   justify-content: space-between;
 }
+
+.stock-info p {
+  display: flex;
+  align-items: center;
+}
+
+.stock-info p span {
+  margin-right: 0.5em;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.gray {
+  color: gray;
+}
+
+.up {
+  width: 0;
+  height: 0;
+  border-left: 7.5px solid transparent;
+  border-right: 7.5px solid transparent;
+  border-bottom: 7.5px solid green;
+}
+
+.down {
+  width: 0;
+  height: 0;
+  border-left: 7.5px solid transparent;
+  border-right: 7.5px solid transparent;
+  border-top: 7.5px solid red;
+}

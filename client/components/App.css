@@ -3,7 +3,7 @@ body {
   justify-content: center;
   background-color: black;
   font-family: 'Montserrat', sans-serif;
-  color: white;
+  color: #ccc;
   width: 100vw;
   height: 100vh;
 }
@@ -18,12 +18,13 @@ input {
 }
 
 a {
-  color: orange;
+  color: #9571d8;
   text-decoration: none;
+  transition: color 0.25s;
 }
 
 a:hover {
-  color: yellow;
+  color: #fcfc4c;
 }
 
 ul {
@@ -35,17 +36,5 @@ ul {
 .header {
   text-align: center;
   padding: 0.5em;
-  border-bottom: 4px solid white;
-}
-
-.red {
-  color: red;
-}
-
-.green {
-  color: green;
-}
-
-.gray {
-  color: gray;
+  border-bottom: 4px solid #ccc;
 }

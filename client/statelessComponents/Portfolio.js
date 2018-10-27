@@ -12,12 +12,14 @@ const Portfolio = ({ updateUser, user, portfolio }) => (
     <h1 className="header">{`Portfolio (${calcPortfolioValue(portfolio)})`}</h1>
     <ul>
       {portfolio.map(stock => {
-        const color = calcColor(stock);
+        const { color, triangle } = calcColor(stock);
 
         return (
           <li key={stock.id} className="stock-info">
             <p>
-              <span className={color}>{stock.symbol}</span> - {stock.quantity}
+              <span className={color}>{stock.symbol}</span>
+              <span> - {stock.quantity} Shares</span>
+              <span className={triangle} />
             </p>
             <p className={color}>{formatCurrency(stock.latestPrice)}</p>
           </li>

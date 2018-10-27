@@ -11,7 +11,7 @@ const Transactions = ({ updateUser, user, transactions }) => (
       {transactions.map(transaction => (
         <li key={transaction.id}>{`BUY (${transaction.symbol}) - ${
           transaction.quantity
-        } @ ${formatCurrency(transaction.price)}`}</li>
+        } Shares @ ${formatCurrency(transaction.price)}`}</li>
       ))}
     </ul>
   </div>
