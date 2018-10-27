@@ -2,7 +2,16 @@ const router = require('express').Router();
 const { User, Transaction, Stock } = require('../db/models');
 const Op = require('sequelize').Op;
 
-// router.get('/portfolio', (req, res, next) => {TODO});
+router.get('/stocks', (req, res, next) => {
+  if (!req.user) {
+    res.status(403).json({ message: 'FORBIDDEN' });
+    return;
+  }
+
+  Stock.findAll({ where: { userId: req.user.id } })
+    .then(stocks => res.json(stocks))
+    .catch(err => next(err));
+});
 
 router.get('/transactions', (req, res, next) => {
   if (!req.user) {
