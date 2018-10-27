@@ -52,7 +52,6 @@ class App extends Component {
 
   render() {
     const { user, fetchedUser, transactions } = this.state;
-    console.log(transactions);
     return !fetchedUser ? (
       <Loading />
     ) : (
