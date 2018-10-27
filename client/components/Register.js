@@ -64,7 +64,7 @@ class Register extends Component {
 
     return (
       <div className="auth">
-        <h1>Register</h1>
+        <h1 className="header">Register</h1>
         {err && <p>{err}</p>}
         <form onSubmit={this.handleSubmit}>
           <input
