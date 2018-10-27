@@ -10,13 +10,17 @@ import Register from './Register';
 import Loading from '../containers/Loading';
 import NoMatch from '../containers/NoMatch';
 
+const apiUrl = 'https://api.iextrading.com/1.0/stock';
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       user: {},
-      fetchedUser: false
+      fetchedUser: false,
+      transactions: [],
+      portfolio: []
     };
 
     this.fetchUser = this.fetchUser.bind(this);
@@ -30,11 +34,60 @@ class App extends Component {
     axios
       .get('/auth/me')
       .then(res => res.data)
-      .then(user => this.setState({ user, fetchedUser: true }));
+      .then(user => {
+        if (user && user.id) {
+          this.fetchTransactions().then(transactions => {
+            this.fetchPortfolio().then(portfolio =>
+              this.setState({
+                user,
+                transactions,
+                portfolio,
+                fetchedUser: true
+              })
+            );
+          });
+        } else {
+          this.setState({ user, fetchedUser: true });
+        }
+      })
+      .catch(err => console.error(err));
+  }
+
+  fetchTransactions() {
+    return axios
+      .get('/api/transactions')
+      .then(res => res.data)
+      .catch(err => console.error(err));
+  }
+
+  fetchPortfolio() {
+    return axios
+      .get('/api/stocks')
+      .then(res => res.data)
+      .then(stocks => {
+        const portfolio = [];
+        const promises = stocks.map(stock => {
+          return axios
+            .get(`${apiUrl}/${stock.symbol}/quote`)
+            .then(res => res.data)
+            .then(quote => {
+              portfolio.push({
+                id: stock.id,
+                symbol: stock.symbol,
+                quantity: stock.quantity,
+                latestPrice: quote.latestPrice * 100,
+                openPrice: quote.open * 100
+              });
+            });
+        });
+
+        return Promise.all(promises).then(() => portfolio);
+      })
+      .catch(err => console.error(err));
   }
 
   render() {
-    const { user, fetchedUser } = this.state;
+    const { user, fetchedUser, transactions, portfolio } = this.state;
     return !fetchedUser ? (
       <Loading />
     ) : (
@@ -46,19 +99,31 @@ class App extends Component {
               exact
               path="/"
               render={() => (
-                <Portfolio user={user} updateUser={this.fetchUser} />
+                <Portfolio
+                  user={user}
+                  updateUser={this.fetchUser}
+                  portfolio={portfolio}
+                />
               )}
             />
             <Route
               path="/portfolio"
               render={() => (
-                <Portfolio user={user} updateUser={this.fetchUser} />
+                <Portfolio
+                  user={user}
+                  updateUser={this.fetchUser}
+                  portfolio={portfolio}
+                />
               )}
             />
             <Route
               path="/history"
               render={() => (
-                <Transactions user={user} updateUser={this.fetchUser} />
+                <Transactions
+                  user={user}
+                  updateUser={this.fetchUser}
+                  transactions={transactions}
+                />
               )}
             />
             <Route component={NoMatch} />

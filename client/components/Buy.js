@@ -37,10 +37,10 @@ class Buy extends Component {
     }
 
     axios
-      .get(`${apiUrl}/${symbol.toLowerCase()}/quote`)
+      .get(`${apiUrl}/${symbol.toLowerCase()}/price`)
       .then(iexRes => iexRes.data)
-      .then(quote => quote.latestPrice * 100)
       .then(price => {
+        price = price * 100;
         if (price * +quantity > this.props.balance) {
           throw new Error('not enough cash');
         }

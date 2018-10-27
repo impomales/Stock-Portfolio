@@ -2,11 +2,22 @@ import React from 'React';
 import Buy from './Buy';
 import Nav from '../containers/Nav';
 
-const Portfolio = ({ updateUser, user }) => (
+import { formatCurrency, calcPortfolioValue } from '../util';
+
+const Portfolio = ({ updateUser, user, portfolio }) => (
   <div>
     <Nav updateUser={updateUser} name={user.name} />
-    <h1>Portfolio</h1>
-
+    <h1>{`Portfolio (${calcPortfolioValue(portfolio)})`}</h1>
+    <div>
+      {portfolio.map(stock => (
+        <li key={stock.id}>
+          <p>
+            {`${stock.symbol} - ${stock.quantity}`}
+          </p>
+          <p>{formatCurrency(stock.latestPrice)}</p>
+        </li>
+      ))}
+    </div>
     <Buy updateUser={updateUser} balance={user.balance} />
     <footer>
       <p>

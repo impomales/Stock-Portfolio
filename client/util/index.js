@@ -7,4 +7,14 @@ const formatCurrency = num => {
   });
 }
 
-export { formatCurrency };
+const calcPortfolioValue = portfolio => {
+  let value = 0;
+
+  portfolio.forEach(stock => {
+    value += stock.latestPrice * stock.quantity
+  });
+
+  return formatCurrency(value);
+}
+
+export { formatCurrency, calcPortfolioValue };
