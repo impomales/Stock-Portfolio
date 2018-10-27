@@ -18,6 +18,10 @@ form {
   margin: 2em;
 }
 
+form a {
+  text-align: center;
+}
+
 input {
   margin-bottom: 1em;
   padding: 1em;
@@ -96,4 +100,14 @@ li {
   width: 85%;
   height: fit-content;
   margin-bottom: 50px;
+}
+
+.error {
+  color: red;
+  font-weight: bolder;
+  font-size: 0.75em;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0.5em 0;
 }

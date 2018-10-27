@@ -18,7 +18,7 @@ class SignIn extends Component {
   }
 
   handleChange(evt) {
-    this.setState({ [evt.target.name]: evt.target.value });
+    this.setState({ [evt.target.name]: evt.target.value, err: '' });
   }
 
   handleSubmit(evt) {
@@ -56,7 +56,7 @@ class SignIn extends Component {
     return (
       <div className="section">
         <h1 className="header">Sign In</h1>
-        {err && <p className="red">{err}</p>}
+        {err && <p className="error">{err}</p>}
         <form onSubmit={this.handleSubmit}>
           <input
             name="email"

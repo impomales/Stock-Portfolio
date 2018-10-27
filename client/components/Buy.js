@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { formatCurrency } from '../util';
 
+import './Buy.css';
+
 const apiUrl = 'https://api.iextrading.com/1.0/stock';
 
 class Buy extends Component {
@@ -19,7 +21,7 @@ class Buy extends Component {
   }
 
   handleChange(evt) {
-    this.setState({ [evt.target.name]: evt.target.value });
+    this.setState({ [evt.target.name]: evt.target.value, err: '' });
   }
 
   handleSubmit(evt) {
@@ -73,10 +75,12 @@ class Buy extends Component {
   render() {
     const { symbol, quantity, err } = this.state;
     return (
-      <div>
-        <p>Cash - {formatCurrency(this.props.balance)}</p>
+      <div className="buy-section">
         <form onSubmit={this.handleSubmit}>
-          {err && <p className="red">{err}</p>}
+          <p className="buy-section-header">
+            Cash - {formatCurrency(this.props.balance)}
+          </p>
+          {err && <p className="error">{err}</p>}
           <input
             name="symbol"
             type="text"

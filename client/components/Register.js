@@ -65,7 +65,7 @@ class Register extends Component {
     return (
       <div className="section">
         <h1 className="header">Register</h1>
-        {err && <p className="red">{err}</p>}
+        {err && <p className="error">{err}</p>}
         <form onSubmit={this.handleSubmit}>
           <input
             name="name"
