@@ -17,7 +17,10 @@ passport.serializeUser((user, done) => done(null, user.id));
 
 passport.deserializeUser((id, done) => {
   return User.findOne({ where: { id: id } })
-    .then(user => done(null, user))
+    .then(user => {
+      done(null, user);
+      return null;
+    })
     .catch(err => done(err));
 });
 
@@ -42,6 +45,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', require('./auth'));
+
+app.use('/api', require('./api'));
 
 // serve static files
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));

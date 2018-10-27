@@ -37,12 +37,15 @@ class Nav extends Component {
       );
 
     return (
-      <nav>
-        {link}
-        <a href="#" onClick={this.handleLogout}>
-          Sign out
-        </a>
-      </nav>
+      <div>
+        <h1>Welcome, {this.props.name}</h1>
+        <nav>
+          {link}
+          <a href="#" onClick={this.handleLogout}>
+            Sign out
+          </a>
+        </nav>
+      </div>
     );
   }
 }

@@ -1,56 +1,25 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
 const router = require('express').Router();
 const { User } = require('../db/models');
 
-// passport.use(
-//   new LocalStrategy(
-//     {
-//       usernameField: 'email',
-//       passwordField: 'password'
-//     },
-//     (email, password, done) => {
-//       User.findOne({ where: { email } })
-//         .then(user => {
-//           console.log('helo')
-//           if (!user)
-//             return done(null, false, {
-//               message: 'Incorrect email.'
-//             });
-//           if (!user.isCorrectPassword(password))
-//             return done(null, false, {
-//               message: 'Invalid password.'
-//             });
+router.post('/login', (req, res, next) => {
+  const { email, password } = req.body;
+  User.findOne({ where: { email } })
+    .then(user => {
+      if (!user) {
+        res.json({ message: 'Incorrect email.' });
+        return;
+      }
+      if (!user.isCorrectPassword(password)) {
+        res.json({ message: 'Incorrect password.' });
+        return;
+      }
 
-//           return done(null, user);
-//         })
-//         .catch(err => done(err));
-//     }
-//   )
-// );
-
-router.post(
-  '/login',
-  (req, res, next) => {
-    const { email, password } = req.body;
-    User.findOne({where: { email }})
-      .then(user => {
-        if (!user) {
-          res.json({message: 'Incorrect email.'});
-          return;
-        }
-        if (!user.isCorrectPassword(password)) {
-          res.json({message: 'Incorrect password.'});
-          return;
-        }
-
-        req.login(user, err => {
-          err ? next(err) : res.json(user);
-        });
-      })
-      .catch(err => next(err));
-  }
-);
+      req.login(user, err => {
+        err ? next(err) : res.json(user);
+      });
+    })
+    .catch(err => next(err));
+});
 
 router.post('/logout', (req, res) => {
   req.logout();

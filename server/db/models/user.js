@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const crypto = require('crypto');
 const db = require('../db');
 
-const User = db.define('User', {
+const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -33,7 +33,7 @@ const User = db.define('User', {
   },
   balance: {
     type: Sequelize.INTEGER,
-    defaultValue: 500000, // in pennies.
+    defaultValue: 500000,
     validate: {
       min: 0
     }
