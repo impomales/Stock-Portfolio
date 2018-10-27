@@ -63,7 +63,7 @@ class Register extends Component {
     if (success) return <Redirect push to="/" />;
 
     return (
-      <div className="auth">
+      <div className="section">
         <h1 className="header">Register</h1>
         {err && <p>{err}</p>}
         <form onSubmit={this.handleSubmit}>

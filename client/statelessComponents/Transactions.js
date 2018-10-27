@@ -4,7 +4,7 @@ import Nav from './Nav';
 import { formatCurrency } from '../util';
 
 const Transactions = ({ updateUser, user, transactions }) => (
-  <div>
+  <div className="section">
     <Nav updateUser={updateUser} name={user.name} />
     <h1 className="header">Transactions</h1>
     <ul>

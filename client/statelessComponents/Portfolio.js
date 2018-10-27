@@ -7,7 +7,7 @@ import './Portfolio.css';
 import { formatCurrency, calcPortfolioValue, calcColor } from '../util';
 
 const Portfolio = ({ updateUser, user, portfolio }) => (
-  <div>
+  <div className="section">
     <Nav updateUser={updateUser} name={user.name} />
     <h1 className="header">{`Portfolio (${calcPortfolioValue(portfolio)})`}</h1>
     <ul>

@@ -54,7 +54,7 @@ class SignIn extends Component {
       return <Redirect push to="/" />;
 
     return (
-      <div className="auth">
+      <div className="section">
         <h1 className="header">Sign In</h1>
         {err && <p>{err}</p>}
         <form onSubmit={this.handleSubmit}>
