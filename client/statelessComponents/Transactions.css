@@ -1,0 +1,28 @@
+.transactions {
+  overflow: scroll;
+  height: 70vh;
+  border: 4px solid gray;
+  margin-top: 2em;
+}
+
+.transactions li {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0.5em;
+}
+
+.transactions li p:last-child {
+  text-align: right;
+  color: gray;
+}
+
+@media (max-width: 800px) {
+  .transactions li {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .transactions li p:last-child {
+    text-align: center;
+  }
+}

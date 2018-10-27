@@ -2,27 +2,34 @@ import React from 'React';
 import Buy from '../components/Buy';
 import Nav from './Nav';
 
+import './Portfolio.css';
+
 import { formatCurrency, calcPortfolioValue, calcColor } from '../util';
 
 const Portfolio = ({ updateUser, user, portfolio }) => (
-  <div>
+  <div className="section">
     <Nav updateUser={updateUser} name={user.name} />
-    <h1>{`Portfolio (${calcPortfolioValue(portfolio)})`}</h1>
-    <div>
-      {portfolio.map(stock => {
-        const color = calcColor(stock);
+    <h1 className="header">{`Portfolio (${calcPortfolioValue(portfolio)})`}</h1>
+    <div className="portfolio-body">
+      <ul>
+        {portfolio.map(stock => {
+          const { color, triangle } = calcColor(stock);
 
-        return (
-          <li key={stock.id}>
-            <p>
-              <span className={color}>{stock.symbol}</span> - {stock.quantity}
-            </p>
-            <p className={color}>{formatCurrency(stock.latestPrice)}</p>
-          </li>
-        );
-      })}
+          return (
+            <li key={stock.id} className="stock-info">
+              <p>
+                <span className={color}>{stock.symbol}</span>
+                <span> - {stock.quantity} Shares</span>
+                <span className={triangle} />
+              </p>
+              <p className={color}>{formatCurrency(stock.latestPrice)}</p>
+            </li>
+          );
+        })}
+      </ul>
+      <Buy updateUser={updateUser} balance={user.balance} />
     </div>
-    <Buy updateUser={updateUser} balance={user.balance} />
+
     <footer>
       <p>
         Data provided for free by{' '}

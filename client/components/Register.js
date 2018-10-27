@@ -63,9 +63,9 @@ class Register extends Component {
     if (success) return <Redirect push to="/" />;
 
     return (
-      <div className="auth">
-        <h1>Register</h1>
-        {err && <p>{err}</p>}
+      <div className="section">
+        <h1 className="header">Register</h1>
+        {err && <p className="error">{err}</p>}
         <form onSubmit={this.handleSubmit}>
           <input
             name="name"
@@ -88,7 +88,7 @@ class Register extends Component {
             placeholder="password"
             onChange={this.handleChange}
           />
-          <input type="submit" value="Register" />
+          <input className="submit" type="submit" value="Register" />
           <Link to="/signin">Already have an account?</Link>
         </form>
       </div>

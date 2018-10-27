@@ -1,0 +1,12 @@
+.buy-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buy-section-header {
+  text-align: center;
+  font-size: 1.2em;
+  margin: 0;
+  padding-bottom: 1em;
+}

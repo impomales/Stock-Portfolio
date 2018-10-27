@@ -18,7 +18,7 @@ class SignIn extends Component {
   }
 
   handleChange(evt) {
-    this.setState({ [evt.target.name]: evt.target.value });
+    this.setState({ [evt.target.name]: evt.target.value, err: '' });
   }
 
   handleSubmit(evt) {
@@ -54,9 +54,9 @@ class SignIn extends Component {
       return <Redirect push to="/" />;
 
     return (
-      <div className="auth">
-        <h1>Sign In</h1>
-        {err && <p>{err}</p>}
+      <div className="section">
+        <h1 className="header">Sign In</h1>
+        {err && <p className="error">{err}</p>}
         <form onSubmit={this.handleSubmit}>
           <input
             name="email"
@@ -72,7 +72,7 @@ class SignIn extends Component {
             placeholder="password"
             onChange={this.handleChange}
           />
-          <input type="submit" value="Sign In" />
+          <input className="submit" type="submit" value="Sign In" />
           <Link to="/register">New to site?</Link>
         </form>
       </div>

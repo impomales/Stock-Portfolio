@@ -1,5 +1,9 @@
 import React from 'react';
 
-const Loading = () => (<div><h1>Loading</h1></div>);
+const Loading = () => (
+  <div className="section">
+    <h1 className="header">Loading</h1>
+  </div>
+);
 
 export default Loading;
