@@ -1,6 +1,6 @@
 import React from 'React';
-import Buy from './Buy';
-import Nav from '../containers/Nav';
+import Buy from '../components/Buy';
+import Nav from './Nav';
 
 import { formatCurrency, calcPortfolioValue } from '../util';
 

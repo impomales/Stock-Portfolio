@@ -1,5 +1,5 @@
 import React from 'React';
-import Nav from '../containers/Nav';
+import Nav from './Nav';
 
 import { formatCurrency } from '../util';
 
