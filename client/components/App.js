@@ -33,8 +33,9 @@ class App extends Component {
       .then(res => res.data)
       .then(user => {
         if (user && user.id) {
-          const transactions = this.fetchTransactions();
-          this.setState({ user, transactions, fetchedUser: true });
+          this.fetchTransactions().then(transactions =>
+            this.setState({ user, transactions, fetchedUser: true })
+          );
         } else {
           this.setState({ user, fetchedUser: true });
         }
@@ -43,11 +44,15 @@ class App extends Component {
   }
 
   fetchTransactions() {
-
+    return axios
+      .get('/api/transactions')
+      .then(res => res.data)
+      .catch(err => console.error(err));
   }
 
   render() {
-    const { user, fetchedUser } = this.state;
+    const { user, fetchedUser, transactions } = this.state;
+    console.log(transactions);
     return !fetchedUser ? (
       <Loading />
     ) : (
@@ -71,7 +76,11 @@ class App extends Component {
             <Route
               path="/history"
               render={() => (
-                <Transactions user={user} updateUser={this.fetchUser} />
+                <Transactions
+                  user={user}
+                  updateUser={this.fetchUser}
+                  transactions={transactions}
+                />
               )}
             />
             <Route component={NoMatch} />
