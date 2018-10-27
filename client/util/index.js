@@ -1,5 +1,5 @@
 const formatCurrency = num => {
-  return num.toLocaleString('en-US', {
+  return (num / 100).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2,
