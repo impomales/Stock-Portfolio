@@ -63,17 +63,20 @@ li {
   color: white;
   box-shadow: none;
   transform: scale(0.9);
-  transition: all 0.25s;
+  transition: all 0.2s ease-in;
+  text-shadow: 2px 4px 5px #333;
 }
 
 .submit:hover {
   color: #fcfc4c;
   transform: scale(1);
+  text-shadow: 1px 2px 3px #333;
 }
 
 .submit:active {
   color: black;
   transform: translateY(5px) scale(1);
+  text-shadow: none;
 }
 
 .submit:focus {
