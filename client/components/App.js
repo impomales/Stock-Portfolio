@@ -16,7 +16,8 @@ class App extends Component {
 
     this.state = {
       user: {},
-      fetchedUser: false
+      fetchedUser: false,
+      transactions: []
     };
 
     this.fetchUser = this.fetchUser.bind(this);
@@ -30,7 +31,19 @@ class App extends Component {
     axios
       .get('/auth/me')
       .then(res => res.data)
-      .then(user => this.setState({ user, fetchedUser: true }));
+      .then(user => {
+        if (user && user.id) {
+          const transactions = this.fetchTransactions();
+          this.setState({ user, transactions, fetchedUser: true });
+        } else {
+          this.setState({ user, fetchedUser: true });
+        }
+      })
+      .catch(err => console.error(err));
+  }
+
+  fetchTransactions() {
+
   }
 
   render() {
