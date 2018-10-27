@@ -15,10 +15,25 @@ body {
 form {
   display: flex;
   flex-direction: column;
+  margin: 2em;
 }
 
 input {
   margin-bottom: 1em;
+  padding: 1em;
+  border: none;
+  background-color: #fffbc7;
+  letter-spacing: 1em;
+  text-align: center;
+  outline: none;
+  font-size: 1em;
+  font-weight: bolder;
+  border: 3px solid black;
+  box-shadow: inset 2px 4px 5px #888;
+}
+
+input:focus {
+  border: 3px solid #9571d8;
 }
 
 a {
@@ -42,7 +57,31 @@ li {
   padding: 0 1em;
 }
 
+.submit {
+  border: none;
+  background-color: #9571d8;
+  color: white;
+  box-shadow: none;
+  transform: scale(0.9);
+  transition: all 0.25s;
+}
+
+.submit:hover {
+  color: #fcfc4c;
+  transform: scale(1);
+}
+
+.submit:active {
+  color: black;
+  transform: translateY(5px) scale(1);
+}
+
+.submit:focus {
+  border: none;
+}
+
 .header {
+  letter-spacing: 0.5em;
   text-align: center;
   width: fit-content;
   margin: auto;
