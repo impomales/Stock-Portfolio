@@ -75,8 +75,8 @@ class App extends Component {
                 id: stock.id,
                 symbol: stock.symbol,
                 quantity: stock.quantity,
-                latestPrice: quote.latestPrice,
-                openPrice: quote.open
+                latestPrice: quote.latestPrice * 100,
+                openPrice: quote.open * 100
               });
             });
         });
@@ -88,7 +88,6 @@ class App extends Component {
 
   render() {
     const { user, fetchedUser, transactions, portfolio } = this.state;
-    console.log(portfolio);
     return !fetchedUser ? (
       <Loading />
     ) : (
