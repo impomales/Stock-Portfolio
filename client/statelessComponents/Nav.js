@@ -39,7 +39,7 @@ class Nav extends Component {
       );
 
     return (
-      <div>
+      <div className="nav">
         <h1>Welcome, {this.props.name}</h1>
         <nav>
           {link}
