@@ -19,17 +19,19 @@ describe('AUTH routes', () => {
 
   describe('POST /auth/login route', () => {
     it('can log in a user', () => {
-      agent
+      return agent
         .post('/auth/login')
         .send(user)
         .set('Accept', 'application/json')
-        .then(resp => expect(resp.body.name).to.equal('Isaias'))
+        .then(resp => {
+          expect(resp.body.name).to.equal('Isaias');
+        })
     });
   });
 
   describe('POST /auth/logout route', () => {
     it('can log out a user and redirects', () => {
-      agent
+      return agent
         .post('/auth/logout')
         .then(resp => {
           expect(resp.status).to.equal(302);
@@ -45,7 +47,7 @@ describe('AUTH routes', () => {
     };
 
     it('can create a new user', () => {
-      agent
+      return agent
         .post('/auth/signup')
         .send(user2)
         .set('Accept', 'application/json')
