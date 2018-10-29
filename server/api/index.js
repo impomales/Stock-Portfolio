@@ -74,7 +74,7 @@ router.post('/transactions', (req, res, next) => {
     })
     .then(updatedStock => {
       console.log('portfolio successfully updated');
-      res.json({ updatedStock });
+      res.status(201).json({ updatedStock });
       return null;
     })
     .catch(err => next(err));
