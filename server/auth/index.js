@@ -33,7 +33,7 @@ router.post('/signup', (req, res, next) => {
   User.create({ email, password, name })
     .then(user =>
       req.login(user, err => {
-        err ? next(err) : res.json(user);
+        err ? next(err) : res.status(201).json(user);
       })
     )
     .catch(err => {

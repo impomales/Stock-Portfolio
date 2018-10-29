@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development --watch",
     "start:dev": "NODE_ENV='development' nodemon server",
-    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\""
+    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" --exit"
   },
   "repository": {
     "type": "git",
@@ -49,6 +49,7 @@
     "css-loader": "^1.0.0",
     "mocha": "^5.2.0",
     "style-loader": "^0.23.0",
+    "supertest": "^3.3.0",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.8"

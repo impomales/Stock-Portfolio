@@ -63,10 +63,15 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-db.sync().then(({ config }) => {
-  console.log(`successfully connected to database: ${config.database}`);
-  const PORT = process.env.PORT || 8080;
-  app.listen(PORT, () => {
-    console.log(`app listening on port: ${PORT}`);
+if (require.main === module) {
+  db.sync().then(({ config }) => {
+    console.log(`successfully connected to database: ${config.database}`);
+    const PORT = process.env.PORT || 8080;
+
+    app.listen(PORT, () => {
+      console.log(`app listening on port: ${PORT}`);
+    });
   });
-});
+}
+
+module.exports = app;

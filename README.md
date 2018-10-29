@@ -1,3 +1,13 @@
+# Setup
+
+```
+createdb stockportfolio
+createdb stockportfolio-test
+npm install
+npm run build
+npm start
+```
+
 # User Stories
 
 1. As a user I want to create a new account with my name, email, and password so that I can buy and trade stocks.

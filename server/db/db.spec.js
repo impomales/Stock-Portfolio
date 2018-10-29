@@ -11,7 +11,7 @@ describe('db', () => {
       { logging: false }
     );
 
-    db.sync(({ config }) => {
+    return db.sync(({ config }) => {
       expect(config.databasename).to.equal('stockportfolio-test');
     });
   });
